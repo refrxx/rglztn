@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#232323" />
+    <script>
+      // Pasang tema sebelum paint agar tidak ada kedip saat halaman dimuat.
+      ;(function () {
+        var stored = null
+        try {
+          stored = window.localStorage.getItem('theme')
+        } catch (error) {}
+        var theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark'
+        var root = document.documentElement
+        root.dataset.theme = theme
+        root.style.colorScheme = theme
+        var meta = document.querySelector('meta[name="theme-color"]')
+        if (meta) meta.setAttribute('content', theme === 'light' ? '#f7f5ef' : '#232323')
+      })()
+    </script>
+    <title>Refriansyah Galiztan — Desainer Website & Manajer Marketplace</title>
+    <meta
+      name="description"
+      content="Portofolio Refriansyah Galiztan, desainer website dan manajer marketplace. Desain web, visual produk, thumbnail, dan materi promosi untuk brand yang ingin terlihat lebih meyakinkan."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Refriansyah Galiztan — Desainer Website & Manajer Marketplace" />
+    <meta
+      property="og:description"
+      content="Desain web dan visual penjualan: satu sistem visual untuk website, marketplace, dan materi promosi."
+    />
+    <meta property="og:locale" content="id_ID" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
