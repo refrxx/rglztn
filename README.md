@@ -1,15 +1,15 @@
 # Refriansyah Galiztan — Portofolio
 
 Situs personal branding: folder kerja per brand, blog, dan halaman tentang.
-Dibangun dengan Vite + React + Tailwind CSS v4, dibungkus Worker Hono untuk
-deploy ke Freebuff Sites.
+Dibangun dengan Vite + React + Tailwind CSS v4 dan dideploy sebagai SPA statis
+ke Vercel.
 
 ## Jalankan
 
 ```sh
 bun install
 bun run dev        # http://localhost:3000
-bun run build      # dist/client (aset) + dist/portfolio/index.js (Worker)
+bun run build      # dist (situs statis)
 bun run typecheck
 ```
 
@@ -76,6 +76,11 @@ Nomor WhatsApp dan email diatur di `src/data/site.ts` (`whatsapp`,
 
 ## Deploy
 
-`deploy.json` menunjuk ke hasil build. Setelah `bun run build`, deploy lewat
-tool Sites. Domain yang sudah ada bisa disambungkan dari panel Sites setelah
-deploy pertama.
+Proyek disiapkan untuk Vercel:
+
+- Framework preset: Vite, build command `bun run build`, output `dist`.
+- `vercel.json` mengarahkan semua route non-API ke `index.html` supaya deep link
+  seperti `/work/<slug>` dan `/journal/<slug>` tidak 404.
+- `api/health.ts` menjadi serverless function di `/api/health`.
+
+Cukup hubungkan repo GitHub ke Vercel dan tambahkan domain dari panel Vercel.

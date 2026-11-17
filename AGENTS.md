@@ -2,18 +2,17 @@
 
 ## Repo shape
 
-- Vite + React 19 single-page site, wrapped in a Hono Cloudflare Worker for deployment to Freebuff Sites.
+- Vite + React 19 single-page site, deployed as a static SPA on Vercel.
 - Entry: `src/main.tsx` -> `src/app/App.tsx`. Routing uses `react-router` v8 (`react-router`, not `react-router-dom`) with `BrowserRouter`; routes are declared in `App.tsx` (`/`, `/work`, `/work/:slug`, `/journal`, `/journal/:slug`, `/about`, catch-all redirect).
-- Worker: `src/worker/index.ts` serves `/api/health` and delegates everything else to the `ASSETS` binding. SPA fallback is configured in `wrangler.jsonc`.
-- Build uses `@cloudflare/vite-plugin` reading `wrangler.jsonc`; `deploy.json` points at `dist/portfolio/index.js` + `dist/client`.
+- API: `api/health.ts` is a Vercel serverless function (`/api/health`); everything else is static.
+- SPA fallback for deep links is configured in `vercel.json` (rewrites unmatched routes to `index.html`).
 
 ## Commands
 
 - `bun install` — this repo uses bun (`bun.lock`); do not switch to npm/pnpm.
 - `bun run dev` — Vite on port 3000, host `0.0.0.0`.
-- `bun run build` — `vite build && node scripts/postbuild.mjs`; emits `dist/client` (assets) and `dist/portfolio/index.js` (Worker).
+- `bun run build` — `vite build`; emits the static site to `dist`.
 - `bun run typecheck` — the only verification step. There are no test, lint, format, or CI scripts/configs.
-- `scripts/postbuild.mjs` deletes dotfiles and `.map` files from `dist` because the Sites uploader rejects them; do not rely on sourcemaps in the output.
 
 ## Content
 

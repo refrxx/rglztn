@@ -1,4 +1,3 @@
-import { cloudflare } from '@cloudflare/vite-plugin'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
@@ -6,7 +5,7 @@ import { defineConfig } from 'vite'
 const previewHost = process.env.__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), cloudflare()],
+  plugins: [react(), tailwindcss()],
   server: {
     host: '0.0.0.0',
     port: 3000,
