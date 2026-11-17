@@ -1,33 +1,32 @@
-import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router'
 
 import { site } from '../../data/site'
 import { useLocalTime } from '../lib/useLocalTime'
+import { ButtonContent, buttonStyles } from './ui/Button'
 
 export function Footer() {
   const time = useLocalTime(site.timezone)
 
   return (
-    <footer className="relative mt-10 rounded-t-[40px] border-t border-line bg-bg-soft">
+    <footer className="relative mt-10 rounded-t-[40px] border-t border-line bg-surface-container-low">
       <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
         <div className="grid gap-12 py-16 md:grid-cols-[1.5fr_1fr_1fr] md:gap-10 lg:py-24">
           <div>
             <span className="label flex items-center gap-2.5 text-faint">
-              <span className="size-1.5 rounded-full bg-accent animate-pulse-soft" />
+              <span className="size-1.5 rounded-full bg-primary animate-pulse-soft" />
               {site.available}
             </span>
             <h2 className="mt-6 max-w-[16ch] font-display text-[clamp(32px,4.6vw,52px)]">
-              Apakah brand Anda perlu <span className="text-accent">ditata?</span>
+              Apakah brand Anda perlu <span className="text-primary">ditata?</span>
             </h2>
             <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <a
                 href={site.whatsapp}
                 target="_blank"
                 rel="noreferrer"
-                className="group btn-pill text-[15px]"
+                className={buttonStyles()}
               >
-                Hubungi via WhatsApp
-                <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                <ButtonContent icon="arrow_outward">Hubungi via WhatsApp</ButtonContent>
               </a>
               <a
                 href={`mailto:${site.email}`}

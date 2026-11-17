@@ -1,9 +1,9 @@
-import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { Link, Navigate, useParams } from 'react-router'
 
 import { site } from '../../data/site'
 import { bySlug, formatDate, nextPost, type Block, type Post as PostType } from '../../data/journal'
-import { Reveal } from '../components/motion'
+import { Reveal } from '../components/anim'
+import { Icon } from '../components/ui/Icon'
 import { usePageMeta } from '../lib/usePageMeta'
 
 export function Post() {
@@ -42,22 +42,22 @@ function PostView({ post }: { post: PostType }) {
       <article className="mx-auto max-w-[820px] px-5 pt-8 sm:px-8">
         <Link
           to="/journal"
-          className="group inline-flex items-center gap-2 text-[14px] text-muted transition-colors hover:text-accent"
+          className="group inline-flex items-center gap-2 text-[14px] text-muted transition-colors hover:text-primary"
         >
-          <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-0.5" />
+          <Icon name="arrow_back" className="text-[18px] transition-transform group-hover:-translate-x-0.5" />
           Semua artikel
         </Link>
 
         <header className="mt-10">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <span className="label text-accent">{post.tag}</span>
+            <span className="label text-primary">{post.tag}</span>
             <span className="size-1 rounded-full bg-line-strong" />
             <span className="num text-[12px] uppercase tracking-[0.14em] text-faint">{formatDate(post.date)}</span>
             <span className="size-1 rounded-full bg-line-strong" />
             <span className="num text-[12px] uppercase tracking-[0.14em] text-faint">{post.readingTime}</span>
           </div>
 
-          <h1 className="headline-fade mt-6 font-display text-[clamp(34px,5.6vw,64px)]">{post.title}</h1>
+          <h1 className="mt-6 font-display text-[clamp(34px,5.6vw,64px)]">{post.title}</h1>
           <p className="mt-6 max-w-[58ch] border-t border-line pt-6 text-[16.5px] leading-relaxed text-muted">
             {post.excerpt}
           </p>
@@ -78,10 +78,10 @@ function PostView({ post }: { post: PostType }) {
               href={site.whatsapp}
               target="_blank"
               rel="noreferrer"
-              className="group inline-flex items-center gap-2 text-[14px] text-fg/80 transition-colors hover:text-accent"
+              className="group inline-flex items-center gap-2 text-[14px] text-fg/80 transition-colors hover:text-primary"
             >
               Diskusikan via WhatsApp
-              <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <Icon name="arrow_outward" className="text-[16px] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
           </div>
         </div>
@@ -95,13 +95,13 @@ function PostView({ post }: { post: PostType }) {
           >
             <div>
               <span className="label text-faint">Artikel berikutnya</span>
-              <p className="mt-3 max-w-[24ch] font-display text-[clamp(26px,4vw,48px)] transition-colors group-hover:text-accent">
+              <p className="mt-3 max-w-[24ch] font-display text-[clamp(26px,4vw,48px)] transition-colors group-hover:text-primary">
                 {next.title}
               </p>
             </div>
-            <span className="inline-flex items-center gap-2 text-[14px] text-muted transition-colors group-hover:text-accent">
+            <span className="inline-flex items-center gap-2 text-[14px] text-muted transition-colors group-hover:text-primary">
               {next.tag}
-              <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <Icon name="arrow_outward" className="text-[18px] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </span>
           </Link>
         </div>

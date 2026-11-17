@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#232323" />
+    <meta name="theme-color" content="#1e100d" />
     <script>
       // Pasang tema sebelum paint agar tidak ada kedip saat halaman dimuat.
       ;(function () {
@@ -12,17 +12,21 @@
         try {
           stored = window.localStorage.getItem('theme')
         } catch (error) {}
-        var theme =
-          stored === 'light' || stored === 'dark'
+        var mode =
+          stored === 'light' || stored === 'dark' || stored === 'system'
             ? stored
-            : window.matchMedia('(prefers-color-scheme: light)').matches
+            : 'system'
+        var theme =
+          mode === 'system'
+            ? window.matchMedia('(prefers-color-scheme: light)').matches
               ? 'light'
               : 'dark'
+            : mode
         var root = document.documentElement
         root.dataset.theme = theme
         root.style.colorScheme = theme
         var meta = document.querySelector('meta[name="theme-color"]')
-        if (meta) meta.setAttribute('content', theme === 'light' ? '#f7f5ef' : '#232323')
+        if (meta) meta.setAttribute('content', theme === 'light' ? '#fff8f6' : '#1e100d')
       })()
     </script>
     <title>Refriansyah Galiztan — Desainer Website & Manajer Marketplace</title>

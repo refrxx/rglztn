@@ -1,10 +1,10 @@
-import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router'
 
 import { site } from '../../data/site'
 import { projects } from '../../data/work'
 import { WorkCard } from '../components/WorkCard'
-import { Lines, Reveal } from '../components/motion'
+import { Lines, Reveal } from '../components/anim'
+import { ButtonContent, buttonStyles } from '../components/ui/Button'
 import { usePageMeta } from '../lib/usePageMeta'
 
 export function Work() {
@@ -53,7 +53,7 @@ export function Work() {
 
       <section className="mx-auto max-w-[1320px] px-5 pb-20 sm:px-8">
         <Reveal>
-          <div className="card-light flex flex-col items-start justify-between gap-6 p-6 sm:flex-row sm:items-center sm:p-8">
+          <div className="flex flex-col items-start justify-between gap-6 rounded-[24px] border border-outline-variant bg-surface-container p-6 sm:flex-row sm:items-center sm:p-8">
             <div>
               <p className="label text-faint">Kolaborasi</p>
               <p className="mt-3 font-display-tight text-[22px] sm:text-[26px]">
@@ -64,10 +64,9 @@ export function Work() {
               href={site.whatsapp}
               target="_blank"
               rel="noreferrer"
-              className="group btn-pill shrink-0 text-[15px]"
+              className={buttonStyles({ className: 'shrink-0' })}
             >
-              Hubungi via WhatsApp
-              <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <ButtonContent icon="arrow_outward">Hubungi via WhatsApp</ButtonContent>
             </a>
           </div>
         </Reveal>

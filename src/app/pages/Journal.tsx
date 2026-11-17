@@ -1,8 +1,8 @@
-import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router'
 
 import { formatDate, sortedPosts } from '../../data/journal'
-import { Lines, Reveal } from '../components/motion'
+import { Lines, Reveal } from '../components/anim'
+import { Icon } from '../components/ui/Icon'
 import { usePageMeta } from '../lib/usePageMeta'
 
 export function Journal() {
@@ -47,11 +47,11 @@ export function Journal() {
                   <span className="num block text-[12px] uppercase tracking-[0.14em] text-faint">
                     {formatDate(post.date)}
                   </span>
-                  <span className="label mt-0 text-[12px] text-accent md:mt-2 md:block">{post.tag}</span>
+                  <span className="label mt-0 text-[12px] text-primary md:mt-2 md:block">{post.tag}</span>
                 </div>
 
                 <div>
-                  <h2 className="max-w-[30ch] font-display-tight text-[clamp(23px,3vw,34px)] leading-[1.06] transition-colors group-hover:text-accent">
+                  <h2 className="max-w-[30ch] font-display-tight text-[clamp(23px,3vw,34px)] leading-[1.06] transition-colors group-hover:text-primary">
                     {post.title}
                   </h2>
                   <p className="mt-3 max-w-[62ch] text-[15px] leading-relaxed text-muted">{post.excerpt}</p>
@@ -59,7 +59,10 @@ export function Journal() {
 
                 <div className="flex items-center justify-between md:justify-end md:gap-4">
                   <span className="num text-[12px] text-faint">{post.readingTime}</span>
-                  <ArrowUpRight className="size-4 text-faint transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
+                  <Icon
+                    name="arrow_outward"
+                    className="text-[18px] text-faint transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+                  />
                 </div>
               </Link>
             </Reveal>

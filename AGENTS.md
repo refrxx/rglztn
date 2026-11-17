@@ -13,6 +13,7 @@
 - `bun run dev` — Vite on port 3000, host `0.0.0.0`.
 - `bun run build` — `vite build`; emits the static site to `dist`.
 - `bun run typecheck` — the only verification step. There are no test, lint, format, or CI scripts/configs.
+- `bun run theme` — regenerates `src/material-tokens.css` from the seed in `scripts/generate-theme.mjs`. Runs under bun; `node` fails on the package's extensionless ESM imports. Commit the generated CSS.
 
 ## Content
 
@@ -26,12 +27,15 @@
 
 ## Styling
 
-- Tailwind v4 via `@tailwindcss/vite`; there is no `tailwind.config.*`. Design tokens and custom utilities are in `src/styles.css` under `@theme` / `@utility`.
-- Fonts: Hanken Grotesk for display, Inter for body, Geist Mono for labels/numbers. All are loaded through `@fontsource-variable` imports in `src/styles.css`.
-- Themes are driven by `data-theme="dark" | "light"` on `<html>`, set by the inline script in `index.html` and by `src/app/lib/theme.ts`. Dark values live in `@theme`; light overrides live in the `html[data-theme='light']` block in `@layer base`. Never hardcode a color in a component — add or use a token instead.
-- Accent tokens are theme-aware: `--color-accent` / `--color-accent-deep` are the same orange (`#ee4d2d` / `#d63e1f`) in dark and light. `--color-on-accent` is the text color for accent buttons. Mock artwork follows the theme through `--color-stage`, `--color-stage-plate`, `--stage-gradient`, and `--stage-shadow`.
-- If the accent changes, also update `public/favicon.svg` (the favicon stays yellow as a static brand mark) and the dark/light values in `README.md`.
+- Tailwind v4 via `@tailwindcss/vite`; there is no `tailwind.config.*`. Tokens and custom utilities are in `src/styles.css` under `@theme` / `@utility`.
+- The visual language is Material You (MD3) flat: tonal surfaces, rounded corners (cards 20–28px, buttons pill), no gradients, no shadows, no grain. Depth comes only from surface-container steps.
+- Colors are generated, not hand-picked. `scripts/generate-theme.mjs` uses `SchemeFidelity` on seed `#ee4d2d` and writes `src/material-tokens.css` (`--md-*` roles for dark in `:root`, light in `html[data-theme='light']`). `src/styles.css` maps those to Tailwind tokens such as `bg-surface-container`, `text-on-surface-variant`, `border-outline-variant`, `bg-primary`. Never hardcode a color in a component; add a token instead. Do not edit `src/material-tokens.css` by hand.
+- Fonts: Hanken Grotesk for display, Inter for body, Geist Mono for labels/numbers, all via `@fontsource-variable` in `src/styles.css`.
+- Themes are driven by `data-theme="dark" | "light"` on `<html>`; the stored value can also be `system` (`src/app/lib/theme.ts`, inline script in `index.html`). Theme color meta: `#fff8f6` light, `#1e100d` dark.
+- Icons are Material Symbols Rounded from the self-hosted subset `public/fonts/material-symbols-rounded.woff2` (10 KB). It contains only `arrow_back`, `arrow_outward`, `brightness_auto`, `check`, `close`, `dark_mode`, `light_mode`, `menu`; render them through `src/app/components/ui/Icon.tsx`. To add an icon you must re-request a subset from Google Fonts with a longer `icon_names=` list, and keep `IconName` in sync. `lucide-react` is no longer used.
+- `src/app/components/ui/` holds the M3 primitives: `Button` (`filled`/`tonal`/`outlined`/`text`, plus `buttonStyles` + `ButtonContent` for links), `IconButton`, `Chip`, `SegmentedButton`, `Icon`. Hover/press overlays use the `state-layer` utility with content wrapped in `relative z-10`.
+- If the seed changes, update `public/favicon.svg` and the theme-color values in `index.html` and `src/app/lib/theme.ts`, then run `bun run theme`.
 - Minimum type sizes: metadata/labels 12px, body 16px, article prose 18px. Keep headings on their existing `clamp(...)` scale.
-- Reuse the existing utilities instead of inventing new ones: `font-display`, `font-display-tight`, `label`, `num`, `panel`, `grain`, `link-draw`, `hairline`, `accent-glow`, `prose-site`, `stage-gradient`, `stage-shadow`, `stage-accent-glow`, `hero-glow`, `portrait-gradient`, `portrait-glow`.
-- Visual language: near-black (dark) or warm paper (light) background, sharp corners, 1px hairlines, yellow (dark) or blue (light) accent used only for labels, CTAs, and markers.
+- Reuse the existing utilities instead of inventing new ones: `font-display`, `font-display-tight`, `label`, `num`, `hairline`, `link-draw`, `state-layer`, `material-symbols-rounded`, `prose-site`.
+- Animations use GSAP only (`gsap` + `@gsap/react`); plugins register in `src/app/lib/gsap.ts` and the shared motion components live in `src/app/components/anim.tsx` (`Lines`, `Reveal`, `Magnetic`, `Marquee`). Every animation must bail out under `prefersReducedMotion()`. `motion` and `framer-motion` are no longer dependencies.
 - Existing code uses relative imports (`../../data/site`). The `@/*` alias in `tsconfig.json` is unused.

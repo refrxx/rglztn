@@ -1,9 +1,11 @@
-import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router'
 
 import { site, tools } from '../../data/site'
 import { projects } from '../../data/work'
-import { Lines, Reveal } from '../components/motion'
+import { Lines, Reveal } from '../components/anim'
+import { ButtonContent, buttonStyles } from '../components/ui/Button'
+import { Chip } from '../components/ui/Chip'
+import { Icon } from '../components/ui/Icon'
 import { usePageMeta } from '../lib/usePageMeta'
 
 const approach = [
@@ -40,29 +42,30 @@ export function About() {
 
         <Lines
           as="h1"
-          lines={['Desain yang memahami', <>cara <span className="text-accent">berjualan.</span></>]}
+          lines={['Desain yang memahami', <>cara <span className="text-primary">berjualan.</span></>]}
           className="mt-8 font-display text-[clamp(38px,7vw,96px)]"
         />
       </section>
 
       <section className="mx-auto mt-12 grid max-w-[1320px] gap-12 px-5 sm:px-8 lg:grid-cols-[320px_1fr] lg:gap-16">
         <Reveal>
-          <div className="portrait-gradient relative aspect-4/5 overflow-hidden rounded-[28px] border border-line">
-            <div className="portrait-glow absolute inset-0" />
-            <div className="absolute inset-0 grid grid-cols-2">
-              <span className="border-r border-fg/[0.07]" />
+          <div className="relative aspect-4/5 overflow-hidden rounded-[28px] bg-primary-container">
+            <div aria-hidden className="absolute inset-0 overflow-hidden">
+              <span className="absolute -right-10 -top-10 size-40 rounded-full bg-tertiary-container" />
+              <span className="absolute -bottom-16 -left-12 size-48 rounded-full bg-secondary-container" />
+              <span className="absolute inset-x-5 top-1/2 h-px bg-on-primary-container/15" />
             </div>
-            <span className="grain absolute inset-0" />
-            <span className="absolute left-4 top-4 size-3 border-l border-t border-fg/25" />
-            <span className="absolute right-4 top-4 size-3 border-r border-t border-fg/25" />
-            <span className="absolute bottom-4 left-4 size-3 border-b border-l border-fg/25" />
-            <span className="absolute bottom-4 right-4 size-3 border-b border-r border-fg/25" />
-            <div className="absolute inset-0 flex flex-col justify-between p-5">
-              <span className="label text-[12px] text-faint">Potret</span>
+
+            <div className="relative flex h-full flex-col justify-between p-5">
+              <span className="label text-[12px] text-on-primary-container/80">Potret</span>
               <div>
-                <span className="block font-display text-[clamp(64px,9vw,112px)] leading-none text-fg/90">RG</span>
-                <span className="mt-3 block text-[14px] text-muted">Refriansyah Galiztan</span>
-                <span className="label mt-1 block text-[12px] text-faint">Desain web · Marketplace</span>
+                <span className="block font-display text-[clamp(64px,9vw,112px)] leading-none text-on-primary-container">
+                  RG
+                </span>
+                <span className="mt-3 block text-[14px] text-on-primary-container/90">Refriansyah Galiztan</span>
+                <span className="label mt-1 block text-[12px] text-on-primary-container/70">
+                  Desain web · Marketplace
+                </span>
               </div>
             </div>
           </div>
@@ -106,8 +109,8 @@ export function About() {
               <p className="label text-faint">Peralatan sehari-hari</p>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {tools.map((tool) => (
-                  <li key={tool} className="rounded-full border border-line px-3.5 py-1.5 text-[13.5px] text-fg/70">
-                    {tool}
+                  <li key={tool}>
+                    <Chip>{tool}</Chip>
                   </li>
                 ))}
               </ul>
@@ -127,8 +130,8 @@ export function About() {
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {approach.map((step, i) => (
             <Reveal key={step.index} delay={i * 0.06}>
-              <div className="card-light h-full p-6">
-                <span className="num text-[12px] tracking-[0.14em] text-accent">{step.index}</span>
+              <div className="h-full rounded-[24px] border border-outline-variant bg-surface-container p-6">
+                <span className="num text-[12px] tracking-[0.14em] text-primary">{step.index}</span>
                 <h3 className="mt-4 max-w-[22ch] font-display-tight text-[21px] leading-[1.12]">{step.title}</h3>
                 <p className="mt-4 text-[15px] leading-relaxed text-muted">{step.body}</p>
               </div>
@@ -141,9 +144,9 @@ export function About() {
         <Reveal>
           <div className="flex items-baseline justify-between border-t border-line pt-5">
             <h2 className="font-display text-[clamp(24px,3.2vw,36px)]">Brand dan peran</h2>
-            <Link to="/work" className="group inline-flex items-center gap-2 text-[14px] text-muted transition-colors hover:text-accent">
+            <Link to="/work" className="group inline-flex items-center gap-2 text-[14px] text-muted transition-colors hover:text-primary">
               Lihat proyek
-              <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <Icon name="arrow_outward" className="text-[16px] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Link>
           </div>
         </Reveal>
@@ -156,7 +159,7 @@ export function About() {
                   to={`/work/${project.slug}`}
                   className="group grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 border-t border-line py-5 transition-colors hover:border-line-strong sm:grid-cols-[1.2fr_1fr_auto]"
                 >
-                  <span className="font-display-tight text-[20px] transition-colors group-hover:text-accent">
+                  <span className="font-display-tight text-[20px] transition-colors group-hover:text-primary">
                     {project.client}
                   </span>
                   <span className="num col-span-2 text-[12px] uppercase tracking-[0.12em] text-faint sm:col-span-1">
@@ -172,7 +175,7 @@ export function About() {
 
       <section className="mx-auto mt-16 max-w-[1320px] px-5 pb-20 sm:px-8">
         <Reveal>
-          <div className="card-light flex flex-col items-start justify-between gap-6 p-6 sm:flex-row sm:items-center sm:p-8">
+          <div className="flex flex-col items-start justify-between gap-6 rounded-[24px] border border-outline-variant bg-surface-container p-6 sm:flex-row sm:items-center sm:p-8">
             <div>
               <p className="label text-faint">Kolaborasi</p>
               <p className="mt-3 max-w-[34ch] font-display-tight text-[22px] leading-[1.2] sm:text-[26px]">
@@ -183,10 +186,9 @@ export function About() {
               href={site.whatsapp}
               target="_blank"
               rel="noreferrer"
-              className="group btn-pill shrink-0 text-[15px]"
+              className={buttonStyles({ className: 'shrink-0' })}
             >
-              Hubungi via WhatsApp
-              <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <ButtonContent icon="arrow_outward">Hubungi via WhatsApp</ButtonContent>
             </a>
           </div>
         </Reveal>
