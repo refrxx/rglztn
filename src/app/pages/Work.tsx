@@ -53,7 +53,7 @@ export function Work() {
 
       <section className="mx-auto max-w-[1320px] px-5 pb-20 sm:px-8">
         <Reveal>
-          <div className="flex flex-col items-start justify-between gap-6 rounded-[24px] border border-outline-variant bg-surface-container p-6 sm:flex-row sm:items-center sm:p-8">
+          <div className="glass flex flex-col items-start justify-between gap-6 rounded-[24px] p-6 sm:flex-row sm:items-center sm:p-8">
             <div>
               <p className="label text-faint">Kolaborasi</p>
               <p className="mt-3 font-display-tight text-[22px] sm:text-[26px]">

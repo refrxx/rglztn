@@ -23,7 +23,7 @@ export function SegmentedButton<T extends string>({
   return (
     <div
       role="group"
-      className={cx('inline-flex items-center overflow-hidden rounded-full border border-outline', className)}
+      className={cx('inline-flex items-center overflow-hidden rounded-full border border-line', className)}
     >
       {options.map((option, index) => {
         const selected = option.value === value
@@ -36,16 +36,14 @@ export function SegmentedButton<T extends string>({
             title={option.label}
             onClick={() => onChange(option.value)}
             className={cx(
-              'state-layer relative inline-flex h-9 items-center gap-1.5 text-[13px] font-medium transition-colors',
+              'state relative inline-flex h-9 items-center gap-1.5 text-[12.5px] font-medium transition-colors',
               showLabels ? 'px-3.5' : 'w-9 justify-center px-0',
-              index > 0 && 'border-l border-outline',
-              selected
-                ? 'bg-secondary-container text-on-secondary-container'
-                : 'text-on-surface-variant hover:text-on-surface',
+              index > 0 && 'border-l border-line',
+              selected ? 'bg-fg/10 text-fg' : 'text-muted hover:text-fg',
             )}
           >
             <span className="relative z-10 inline-flex items-center gap-1.5">
-              {option.icon ? <Icon name={option.icon} filled={selected} className="text-[18px]" /> : null}
+              {option.icon ? <Icon name={option.icon} size={16} /> : null}
               {showLabels ? option.label : <span className="sr-only">{option.label}</span>}
             </span>
           </button>

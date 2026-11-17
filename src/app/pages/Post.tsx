@@ -42,15 +42,15 @@ function PostView({ post }: { post: PostType }) {
       <article className="mx-auto max-w-[820px] px-5 pt-8 sm:px-8">
         <Link
           to="/journal"
-          className="group inline-flex items-center gap-2 text-[14px] text-muted transition-colors hover:text-primary"
+          className="group inline-flex items-center gap-2 text-[14px] text-muted transition-colors hover:text-fg"
         >
-          <Icon name="arrow_back" className="text-[18px] transition-transform group-hover:-translate-x-0.5" />
+          <Icon name="arrow_back" className="transition-transform group-hover:-translate-x-0.5" />
           Semua artikel
         </Link>
 
         <header className="mt-10">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <span className="label text-primary">{post.tag}</span>
+            <span className="label text-accent">{post.tag}</span>
             <span className="size-1 rounded-full bg-line-strong" />
             <span className="num text-[12px] uppercase tracking-[0.14em] text-faint">{formatDate(post.date)}</span>
             <span className="size-1 rounded-full bg-line-strong" />
@@ -78,10 +78,13 @@ function PostView({ post }: { post: PostType }) {
               href={site.whatsapp}
               target="_blank"
               rel="noreferrer"
-              className="group inline-flex items-center gap-2 text-[14px] text-fg/80 transition-colors hover:text-primary"
+              className="group inline-flex items-center gap-2 text-[14px] text-muted transition-colors hover:text-accent"
             >
               Diskusikan via WhatsApp
-              <Icon name="arrow_outward" className="text-[16px] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <Icon
+                name="arrow_outward"
+                className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
             </a>
           </div>
         </div>
@@ -95,13 +98,16 @@ function PostView({ post }: { post: PostType }) {
           >
             <div>
               <span className="label text-faint">Artikel berikutnya</span>
-              <p className="mt-3 max-w-[24ch] font-display text-[clamp(26px,4vw,48px)] transition-colors group-hover:text-primary">
+              <p className="mt-3 max-w-[24ch] font-display text-[clamp(26px,4vw,48px)] transition-colors group-hover:text-accent">
                 {next.title}
               </p>
             </div>
-            <span className="inline-flex items-center gap-2 text-[14px] text-muted transition-colors group-hover:text-primary">
+            <span className="inline-flex items-center gap-2 text-[14px] text-muted">
               {next.tag}
-              <Icon name="arrow_outward" className="text-[18px] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <Icon
+                name="arrow_outward"
+                className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
             </span>
           </Link>
         </div>

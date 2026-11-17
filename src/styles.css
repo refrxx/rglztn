@@ -1,16 +1,35 @@
 @import 'tailwindcss';
-@import './material-tokens.css';
 @import '@fontsource-variable/hanken-grotesk';
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/geist-mono';
 
-/* Subset Material Symbols Rounded: hanya ikon yang dipakai (10 KB). */
-@font-face {
-  font-family: 'Material Symbols Rounded';
-  font-style: normal;
-  font-weight: 100 700;
-  font-display: swap;
-  src: url('/fonts/material-symbols-rounded.woff2') format('woff2');
+/* Palet netral. Satu-satunya warna berhue adalah aksen biru, dipakai tipis. */
+:root {
+  --ui-bg: #0a0a0b;
+  --ui-surface: #121214;
+  --ui-raised: #17171a;
+  --ui-line: #27272a;
+  --ui-line-strong: #3f3f46;
+  --ui-fg: #fafafa;
+  --ui-muted: #a1a1aa;
+  --ui-faint: #71717a;
+  --ui-ink: #fafafa;
+  --ui-on-ink: #18181b;
+  --ui-accent: #93c5fd;
+}
+
+html[data-theme='light'] {
+  --ui-bg: #fafafa;
+  --ui-surface: #ffffff;
+  --ui-raised: #f4f4f5;
+  --ui-line: #e4e4e7;
+  --ui-line-strong: #d4d4d8;
+  --ui-fg: #18181b;
+  --ui-muted: #52525b;
+  --ui-faint: #71717a;
+  --ui-ink: #18181b;
+  --ui-on-ink: #fafafa;
+  --ui-accent: #1d4ed8;
 }
 
 @theme {
@@ -18,63 +37,19 @@
   --font-display: 'Hanken Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, monospace;
 
-  /* Material You roles */
-  --color-primary: var(--md-primary);
-  --color-on-primary: var(--md-on-primary);
-  --color-primary-container: var(--md-primary-container);
-  --color-on-primary-container: var(--md-on-primary-container);
-  --color-primary-fixed: var(--md-primary-fixed);
-  --color-primary-fixed-dim: var(--md-primary-fixed-dim);
-  --color-on-primary-fixed: var(--md-on-primary-fixed);
-  --color-on-primary-fixed-variant: var(--md-on-primary-fixed-variant);
-  --color-secondary: var(--md-secondary);
-  --color-on-secondary: var(--md-on-secondary);
-  --color-secondary-container: var(--md-secondary-container);
-  --color-on-secondary-container: var(--md-on-secondary-container);
-  --color-tertiary: var(--md-tertiary);
-  --color-on-tertiary: var(--md-on-tertiary);
-  --color-tertiary-container: var(--md-tertiary-container);
-  --color-on-tertiary-container: var(--md-on-tertiary-container);
-  --color-error: var(--md-error);
-  --color-on-error: var(--md-on-error);
-  --color-error-container: var(--md-error-container);
-  --color-on-error-container: var(--md-on-error-container);
-  --color-surface: var(--md-surface);
-  --color-surface-dim: var(--md-surface-dim);
-  --color-surface-bright: var(--md-surface-bright);
-  --color-surface-container-lowest: var(--md-surface-container-lowest);
-  --color-surface-container-low: var(--md-surface-container-low);
-  --color-surface-container: var(--md-surface-container);
-  --color-surface-container-high: var(--md-surface-container-high);
-  --color-surface-container-highest: var(--md-surface-container-highest);
-  --color-on-surface: var(--md-on-surface);
-  --color-on-surface-variant: var(--md-on-surface-variant);
-  --color-surface-variant: var(--md-surface-variant);
-  --color-outline: var(--md-outline);
-  --color-outline-variant: var(--md-outline-variant);
-  --color-inverse-surface: var(--md-inverse-surface);
-  --color-inverse-on-surface: var(--md-inverse-on-surface);
-  --color-inverse-primary: var(--md-inverse-primary);
-  --color-surface-tint: var(--md-surface-tint);
+  --color-bg: var(--ui-bg);
+  --color-surface: var(--ui-surface);
+  --color-raised: var(--ui-raised);
+  --color-line: var(--ui-line);
+  --color-line-strong: var(--ui-line-strong);
+  --color-fg: var(--ui-fg);
+  --color-muted: var(--ui-muted);
+  --color-faint: var(--ui-faint);
+  --color-ink: var(--ui-ink);
+  --color-on-ink: var(--ui-on-ink);
+  --color-accent: var(--ui-accent);
 
-  /* Alias lama: menjaga markup yang belum disentuh tetap memakai role MD3. */
-  --color-bg: var(--md-surface);
-  --color-bg-soft: var(--md-surface-container-low);
-  --color-surface-2: var(--md-surface-container-high);
-  --color-line: var(--md-outline-variant);
-  --color-line-strong: var(--md-outline);
-  --color-fg: var(--md-on-surface);
-  --color-muted: var(--md-on-surface-variant);
-  --color-faint: var(--md-on-surface-variant);
-  --color-accent: var(--md-primary);
-  --color-accent-deep: var(--md-primary);
-  --color-on-accent: var(--md-on-primary);
-  --color-stage: var(--md-surface-container);
-  --color-stage-plate: var(--md-surface-container-highest);
-
-  --radius-card: 28px;
-
-  /* Status dot: hanya opacity, tanpa shadow (flat). */
+  /* Status dot: hanya opacity, tanpa shadow. */
   --animate-pulse-soft: pulse-soft 3.2s ease-in-out infinite;
   @keyframes pulse-soft {
     0%,
@@ -107,8 +82,9 @@
     background: var(--color-bg);
     color: var(--color-fg);
     font-family: var(--font-sans);
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
+    line-height: 1.6;
     letter-spacing: -0.006em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -127,12 +103,12 @@
     text-decoration: none;
   }
   :focus-visible {
-    outline: 3px solid color-mix(in srgb, var(--color-primary) 70%, transparent);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
   }
   ::selection {
-    background: var(--color-primary);
-    color: var(--color-on-primary);
+    background: var(--color-accent);
+    color: var(--color-bg);
   }
   img {
     user-select: none;
@@ -145,7 +121,7 @@
     background: var(--color-bg);
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--color-outline);
+    background: var(--color-line-strong);
     border: 3px solid var(--color-bg);
     border-radius: 99px;
   }
@@ -165,24 +141,23 @@
 
 @utility font-display {
   font-family: var(--font-display);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 0.95;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
 }
 
 @utility font-display-tight {
   font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 @utility label {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   line-height: 1.4;
 }
 
@@ -209,8 +184,8 @@
   }
 }
 
-/* State layer khas Material 3: overlay currentColor saat hover/tekan. */
-@utility state-layer {
+/* Overlay tekan netral: mengikuti currentColor, tanpa warna merek. */
+@utility state {
   position: relative;
   isolation: isolate;
   &::after {
@@ -225,52 +200,46 @@
     transition: opacity 150ms cubic-bezier(0.2, 0, 0, 1);
   }
   &:hover::after {
-    opacity: 0.08;
+    opacity: 0.07;
   }
   &:active::after {
     opacity: 0.12;
   }
 }
 
-/* Ikon Material Symbols Rounded (subset, lihat public/fonts). */
-@utility material-symbols-rounded {
-  font-family: 'Material Symbols Rounded';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24;
-  -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
-  user-select: none;
+/* Panel tembus pandang netral: blur + garis tipis + highlight tepi atas. */
+@utility glass {
+  background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+  backdrop-filter: blur(18px) saturate(1.15);
+  border: 1px solid var(--color-line);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.06),
+    0 10px 30px color-mix(in srgb, #000 12%, transparent);
+  transition:
+    background-color 0.25s,
+    border-color 0.25s;
+  &:is(a, button):hover {
+    background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+    border-color: var(--color-line-strong);
+  }
 }
 
 @utility prose-site {
   & p {
     color: var(--color-muted);
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.75;
-    letter-spacing: -0.003em;
   }
   & p + p {
     margin-top: 1.35em;
   }
   & h2 {
     font-family: var(--font-display);
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: -0.03em;
-    line-height: 1.05;
-    font-size: clamp(26px, 3vw, 34px);
+    line-height: 1.1;
+    font-size: clamp(20px, 2.4vw, 26px);
     color: var(--color-fg);
     margin-top: 2.4em;
     margin-bottom: 0.7em;
@@ -279,13 +248,13 @@
     margin: 2.2em 0;
     padding: 1.3em 1.5em;
     border-radius: 16px;
-    background: var(--color-surface-container);
+    background: var(--color-raised);
     border: 1px solid var(--color-line);
     font-family: var(--font-display);
     font-weight: 400;
-    font-size: clamp(22px, 2.4vw, 28px);
-    line-height: 1.3;
-    letter-spacing: -0.03em;
+    font-size: clamp(18px, 2.2vw, 22px);
+    line-height: 1.35;
+    letter-spacing: -0.02em;
     color: var(--color-fg);
   }
   & ul {
@@ -297,17 +266,17 @@
     position: relative;
     padding-left: 22px;
     color: var(--color-muted);
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.65;
   }
   & li::before {
     content: '';
     position: absolute;
     left: 2px;
-    top: 0.68em;
-    width: 7px;
-    height: 7px;
+    top: 0.72em;
+    width: 6px;
+    height: 6px;
     border-radius: 999px;
-    background: var(--color-primary);
+    background: var(--color-accent);
   }
 }

@@ -47,11 +47,11 @@ export function Journal() {
                   <span className="num block text-[12px] uppercase tracking-[0.14em] text-faint">
                     {formatDate(post.date)}
                   </span>
-                  <span className="label mt-0 text-[12px] text-primary md:mt-2 md:block">{post.tag}</span>
+                  <span className="label mt-0 text-[12px] text-accent md:mt-2 md:block">{post.tag}</span>
                 </div>
 
                 <div>
-                  <h2 className="max-w-[30ch] font-display-tight text-[clamp(23px,3vw,34px)] leading-[1.06] transition-colors group-hover:text-primary">
+                  <h2 className="max-w-[30ch] font-display-tight text-[clamp(23px,3vw,34px)] leading-[1.06]">
                     {post.title}
                   </h2>
                   <p className="mt-3 max-w-[62ch] text-[15px] leading-relaxed text-muted">{post.excerpt}</p>
@@ -61,7 +61,7 @@ export function Journal() {
                   <span className="num text-[12px] text-faint">{post.readingTime}</span>
                   <Icon
                     name="arrow_outward"
-                    className="text-[18px] text-faint transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+                    className="text-faint transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
                   />
                 </div>
               </Link>

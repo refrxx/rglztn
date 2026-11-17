@@ -4,50 +4,44 @@ import { site } from '../../data/site'
 import { useLocalTime } from '../lib/useLocalTime'
 import { ButtonContent, buttonStyles } from './ui/Button'
 
+const nav = [
+  { to: '/work', label: 'Portofolio' },
+  { to: '/journal', label: 'Artikel' },
+  { to: '/about', label: 'Tentang' },
+  { to: '/#layanan', label: 'Layanan' },
+]
+
 export function Footer() {
   const time = useLocalTime(site.timezone)
 
   return (
-    <footer className="relative mt-10 rounded-t-[40px] border-t border-line bg-surface-container-low">
-      <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
-        <div className="grid gap-12 py-16 md:grid-cols-[1.5fr_1fr_1fr] md:gap-10 lg:py-24">
+    <footer className="mx-auto max-w-[1320px] px-5 pb-[calc(env(safe-area-inset-bottom,0px)+32px)] sm:px-8">
+      <div className="glass rounded-[28px] px-6 py-10 sm:px-10 sm:py-12">
+        <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
           <div>
-            <span className="label flex items-center gap-2.5 text-faint">
-              <span className="size-1.5 rounded-full bg-primary animate-pulse-soft" />
+            <span className="inline-flex items-center gap-2 text-[12px] text-muted">
+              <span className="size-1.5 rounded-full bg-accent animate-pulse-soft" />
               {site.available}
             </span>
-            <h2 className="mt-6 max-w-[16ch] font-display text-[clamp(32px,4.6vw,52px)]">
-              Apakah brand Anda perlu <span className="text-primary">ditata?</span>
+            <h2 className="mt-5 max-w-[20ch] font-display text-[clamp(26px,3.6vw,38px)]">
+              Apakah brand Anda perlu ditata?
             </h2>
-            <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <a
-                href={site.whatsapp}
-                target="_blank"
-                rel="noreferrer"
-                className={buttonStyles()}
-              >
+            <div className="mt-7 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+              <a href={site.whatsapp} target="_blank" rel="noreferrer" className={buttonStyles()}>
                 <ButtonContent icon="arrow_outward">Hubungi via WhatsApp</ButtonContent>
               </a>
-              <a
-                href={`mailto:${site.email}`}
-                className="link-draw text-[15px] text-muted transition-colors hover:text-fg"
-              >
+              <a href={`mailto:${site.email}`} className="link-draw text-[13.5px] text-muted hover:text-fg">
                 {site.email}
               </a>
             </div>
           </div>
 
-          <nav className="space-y-4">
-            <p className="label text-faint">Navigasi</p>
-            <ul className="space-y-2.5 text-[15px] text-muted">
-              {[
-                { to: '/work', label: 'Portofolio' },
-                { to: '/journal', label: 'Artikel' },
-                { to: '/about', label: 'Tentang' },
-                { to: '/#layanan', label: 'Layanan' },
-              ].map((item) => (
+          <nav>
+            <p className="label text-muted">Navigasi</p>
+            <ul className="mt-4 space-y-2.5 text-[14px] text-muted">
+              {nav.map((item) => (
                 <li key={item.to}>
-                  <Link to={item.to} className="link-draw transition-colors hover:text-fg">
+                  <Link to={item.to} className="link-draw hover:text-fg">
                     {item.label}
                   </Link>
                 </li>
@@ -55,23 +49,23 @@ export function Footer() {
             </ul>
           </nav>
 
-          <div className="space-y-4">
-            <p className="label text-faint">Kontak</p>
-            <ul className="space-y-2.5 text-[15px] text-muted">
+          <div>
+            <p className="label text-muted">Kontak</p>
+            <ul className="mt-4 space-y-2.5 text-[14px] text-muted">
               {site.socials.map((social) => (
                 <li key={social.label}>
                   <a
                     href={social.href}
                     target={social.href.startsWith('mailto') ? undefined : '_blank'}
                     rel="noreferrer"
-                    className="link-draw transition-colors hover:text-fg"
+                    className="link-draw hover:text-fg"
                   >
                     {social.label}
                   </a>
                 </li>
               ))}
               <li>
-                <a href={site.whatsapp} target="_blank" rel="noreferrer" className="link-draw transition-colors hover:text-fg">
+                <a href={site.whatsapp} target="_blank" rel="noreferrer" className="link-draw hover:text-fg">
                   WhatsApp
                 </a>
               </li>
@@ -79,9 +73,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-line py-6 text-[13px] text-faint sm:flex-row sm:items-center sm:justify-between">
-          <span>© {new Date().getFullYear()} {site.name}</span>
-          <span className="num text-[12px] uppercase tracking-[0.14em]">
+        <div className="mt-10 flex flex-col gap-2 border-t border-line pt-5 text-[12px] text-muted sm:flex-row sm:items-center sm:justify-between">
+          <span>
+            © {new Date().getFullYear()} {site.name}
+          </span>
+          <span className="num uppercase tracking-[0.1em]">
             {site.location} · {time} WIB
           </span>
           <span className="hidden sm:inline">Dirancang dan dibangun sendiri.</span>

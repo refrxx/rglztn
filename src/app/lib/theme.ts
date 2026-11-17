@@ -33,7 +33,7 @@ export function applyTheme(theme: Theme) {
   root.style.colorScheme = theme
 
   const meta = document.querySelector('meta[name="theme-color"]')
-  if (meta) meta.setAttribute('content', theme === 'light' ? '#fff8f6' : '#1e100d')
+  if (meta) meta.setAttribute('content', theme === 'light' ? '#fafafa' : '#0a0a0b')
 }
 
 export function useTheme() {

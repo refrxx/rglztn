@@ -42,30 +42,26 @@ export function About() {
 
         <Lines
           as="h1"
-          lines={['Desain yang memahami', <>cara <span className="text-primary">berjualan.</span></>]}
+          lines={['Desain yang memahami', <>cara <span className="text-muted">berjualan.</span></>]}
           className="mt-8 font-display text-[clamp(38px,7vw,96px)]"
         />
       </section>
 
       <section className="mx-auto mt-12 grid max-w-[1320px] gap-12 px-5 sm:px-8 lg:grid-cols-[320px_1fr] lg:gap-16">
         <Reveal>
-          <div className="relative aspect-4/5 overflow-hidden rounded-[28px] bg-primary-container">
-            <div aria-hidden className="absolute inset-0 overflow-hidden">
-              <span className="absolute -right-10 -top-10 size-40 rounded-full bg-tertiary-container" />
-              <span className="absolute -bottom-16 -left-12 size-48 rounded-full bg-secondary-container" />
-              <span className="absolute inset-x-5 top-1/2 h-px bg-on-primary-container/15" />
+          <div className="glass relative aspect-4/5 overflow-hidden rounded-[28px]">
+            <div aria-hidden className="absolute inset-0 grid grid-cols-3">
+              <span className="border-r border-line/60" />
+              <span className="border-r border-line/60" />
             </div>
+            <span aria-hidden className="absolute left-5 top-1/2 size-1.5 rounded-full bg-accent" />
 
             <div className="relative flex h-full flex-col justify-between p-5">
-              <span className="label text-[12px] text-on-primary-container/80">Potret</span>
+              <span className="label text-[12px] text-faint">Potret</span>
               <div>
-                <span className="block font-display text-[clamp(64px,9vw,112px)] leading-none text-on-primary-container">
-                  RG
-                </span>
-                <span className="mt-3 block text-[14px] text-on-primary-container/90">Refriansyah Galiztan</span>
-                <span className="label mt-1 block text-[12px] text-on-primary-container/70">
-                  Desain web · Marketplace
-                </span>
+                <span className="block font-display text-[clamp(64px,9vw,112px)] leading-none">RG</span>
+                <span className="mt-3 block text-[14px] text-muted">Refriansyah Galiztan</span>
+                <span className="label mt-1 block text-[12px] text-faint">Desain web · Marketplace</span>
               </div>
             </div>
           </div>
@@ -78,7 +74,7 @@ export function About() {
             ].map((item) => (
               <div key={item.term} className="flex items-baseline justify-between gap-4 border-b border-line pb-3">
                 <dt className="label text-faint">{item.term}</dt>
-                <dd className="text-right text-[13.5px] text-fg/80">{item.value}</dd>
+                <dd className="text-right text-[13.5px] text-muted">{item.value}</dd>
               </div>
             ))}
           </dl>
@@ -129,9 +125,9 @@ export function About() {
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {approach.map((step, i) => (
-            <Reveal key={step.index} delay={i * 0.06}>
-              <div className="h-full rounded-[24px] border border-outline-variant bg-surface-container p-6">
-                <span className="num text-[12px] tracking-[0.14em] text-primary">{step.index}</span>
+            <Reveal key={step.index} delay={i * 0.06} className="h-full">
+              <div className="glass h-full rounded-[24px] p-6">
+                <span className="num text-[12px] tracking-[0.14em] text-accent">{step.index}</span>
                 <h3 className="mt-4 max-w-[22ch] font-display-tight text-[21px] leading-[1.12]">{step.title}</h3>
                 <p className="mt-4 text-[15px] leading-relaxed text-muted">{step.body}</p>
               </div>
@@ -144,9 +140,15 @@ export function About() {
         <Reveal>
           <div className="flex items-baseline justify-between border-t border-line pt-5">
             <h2 className="font-display text-[clamp(24px,3.2vw,36px)]">Brand dan peran</h2>
-            <Link to="/work" className="group inline-flex items-center gap-2 text-[14px] text-muted transition-colors hover:text-primary">
+            <Link
+              to="/work"
+              className="group inline-flex items-center gap-2 text-[14px] text-muted transition-colors hover:text-accent"
+            >
               Lihat proyek
-              <Icon name="arrow_outward" className="text-[16px] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <Icon
+                name="arrow_outward"
+                className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
             </Link>
           </div>
         </Reveal>
@@ -159,7 +161,7 @@ export function About() {
                   to={`/work/${project.slug}`}
                   className="group grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 border-t border-line py-5 transition-colors hover:border-line-strong sm:grid-cols-[1.2fr_1fr_auto]"
                 >
-                  <span className="font-display-tight text-[20px] transition-colors group-hover:text-primary">
+                  <span className="font-display-tight text-[20px] transition-colors group-hover:text-accent">
                     {project.client}
                   </span>
                   <span className="num col-span-2 text-[12px] uppercase tracking-[0.12em] text-faint sm:col-span-1">
@@ -175,7 +177,7 @@ export function About() {
 
       <section className="mx-auto mt-16 max-w-[1320px] px-5 pb-20 sm:px-8">
         <Reveal>
-          <div className="flex flex-col items-start justify-between gap-6 rounded-[24px] border border-outline-variant bg-surface-container p-6 sm:flex-row sm:items-center sm:p-8">
+          <div className="glass flex flex-col items-start justify-between gap-6 rounded-[24px] p-6 sm:flex-row sm:items-center sm:p-8">
             <div>
               <p className="label text-faint">Kolaborasi</p>
               <p className="mt-3 max-w-[34ch] font-display-tight text-[22px] leading-[1.2] sm:text-[26px]">

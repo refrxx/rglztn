@@ -2,17 +2,16 @@ import type { ReactNode } from 'react'
 
 import { cx } from '../../lib/cx'
 
-export type ChipVariant = 'assist' | 'selected' | 'primary'
+export type ChipVariant = 'default' | 'accent'
 
 const variants: Record<ChipVariant, string> = {
-  assist: 'border border-outline-variant bg-surface-container-high text-on-surface-variant',
-  selected: 'bg-secondary-container text-on-secondary-container',
-  primary: 'bg-primary-container text-on-primary-container',
+  default: 'border border-line bg-surface text-muted',
+  accent: 'border border-line bg-surface text-fg',
 }
 
 export function Chip({
   children,
-  variant = 'assist',
+  variant = 'default',
   className,
 }: {
   children: ReactNode
@@ -22,11 +21,12 @@ export function Chip({
   return (
     <span
       className={cx(
-        'inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[13px] font-medium',
+        'inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[12.5px] font-medium',
         variants[variant],
         className,
       )}
     >
+      {variant === 'accent' ? <span aria-hidden className="size-1.5 rounded-full bg-accent" /> : null}
       {children}
     </span>
   )

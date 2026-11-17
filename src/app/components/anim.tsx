@@ -108,52 +108,6 @@ export function Reveal({
   )
 }
 
-/** Tombol yang sedikit condong ke arah kursor. */
-export function Magnetic({
-  children,
-  className,
-  strength = 0.22,
-}: {
-  children: ReactNode
-  className?: string
-  strength?: number
-}) {
-  const ref = useRef<HTMLDivElement>(null)
-  const xTo = useRef<((value: number) => void) | null>(null)
-  const yTo = useRef<((value: number) => void) | null>(null)
-
-  useGSAP(
-    () => {
-      const el = ref.current
-      if (!el) return
-      if (prefersReducedMotion() || window.matchMedia('(hover: none)').matches) return
-
-      xTo.current = gsap.quickTo(el, 'x', { duration: 0.4, ease: 'power3.out' })
-      yTo.current = gsap.quickTo(el, 'y', { duration: 0.4, ease: 'power3.out' })
-    },
-    { scope: ref },
-  )
-
-  return (
-    <div
-      ref={ref}
-      className={cx('inline-block', className)}
-      onPointerMove={(event) => {
-        const rect = ref.current?.getBoundingClientRect()
-        if (!rect) return
-        xTo.current?.((event.clientX - rect.left - rect.width / 2) * strength)
-        yTo.current?.((event.clientY - rect.top - rect.height / 2) * strength)
-      }}
-      onPointerLeave={() => {
-        xTo.current?.(0)
-        yTo.current?.(0)
-      }}
-    >
-      {children}
-    </div>
-  )
-}
-
 /** Marquee horizontal dengan GSAP; berhenti saat kursor di atasnya. */
 export function Marquee({ items, className }: { items: string[]; className?: string }) {
   const trackRef = useRef<HTMLDivElement>(null)
@@ -183,7 +137,7 @@ export function Marquee({ items, className }: { items: string[]; className?: str
         {[...items, ...items].map((item, i) => (
           <span key={`${item}-${i}`} className="flex items-center whitespace-nowrap">
             <span className="label px-6 text-[12px] text-muted">{item}</span>
-            <span aria-hidden className="size-1.5 rounded-full bg-primary" />
+            <span aria-hidden className="size-1.5 rounded-full bg-accent" />
           </span>
         ))}
       </div>

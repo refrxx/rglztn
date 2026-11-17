@@ -44,14 +44,14 @@ export function Nav() {
 
       if (open) {
         gsap.set(el, { pointerEvents: 'auto' })
-        const timeline = gsap.timeline()
-        timeline
-          .fromTo(el, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2, ease: 'power2.out' })
+        gsap
+          .timeline()
+          .fromTo(el, { autoAlpha: 0, y: -8 }, { autoAlpha: 1, y: 0, duration: 0.25, ease: 'power2.out' })
           .fromTo(
             items,
-            { autoAlpha: 0, y: 18 },
-            { autoAlpha: 1, y: 0, duration: 0.35, stagger: 0.05, ease: 'power3.out' },
-            0.04,
+            { autoAlpha: 0, y: 10 },
+            { autoAlpha: 1, y: 0, duration: 0.3, stagger: 0.04, ease: 'power3.out' },
+            0.05,
           )
       } else {
         gsap.to(el, {
@@ -67,57 +67,51 @@ export function Nav() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg">
-        <div className="mx-auto flex h-[70px] max-w-[1320px] items-center justify-between px-5 sm:px-8">
-          <Link to="/" className="group flex items-center gap-3" aria-label="Beranda">
-            <span className="grid size-10 place-items-center rounded-[14px] bg-primary-container font-mono text-[12px] tracking-[0.14em] text-on-primary-container transition-transform group-hover:-rotate-6">
-              RG
-            </span>
-            <span className="hidden leading-tight lg:block">
-              <span className="block text-[14.5px] text-on-surface">{site.name}</span>
-              <span className="label mt-1 block text-[12px] text-faint">Desain web · Marketplace</span>
-            </span>
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-[calc(env(safe-area-inset-top,0px)+12px)]">
+        <div className="glass pointer-events-auto flex items-center gap-1 rounded-full p-1.5">
+          <Link
+            to="/"
+            aria-label="Beranda"
+            className="grid size-9 place-items-center rounded-full bg-ink font-display text-[12px] tracking-[0.02em] text-on-ink"
+          >
+            RG
           </Link>
 
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-0.5 md:flex">
             {links.map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}
                 className={({ isActive }) =>
                   cx(
-                    'state-layer rounded-full px-3.5 py-2 text-[15px] tracking-[-0.01em] transition-colors',
-                    isActive
-                      ? 'bg-secondary-container text-on-secondary-container'
-                      : 'text-on-surface-variant hover:text-on-surface',
+                    'state rounded-full px-3.5 py-2 text-[13px] transition-colors',
+                    isActive ? 'bg-fg/10 text-fg' : 'text-muted hover:text-fg',
                   )
                 }
               >
                 <span className="relative z-10">{link.label}</span>
               </NavLink>
             ))}
-
-            <ThemeToggle mode={mode} onChange={setMode} compact className="ml-2" />
-
-            <a
-              href={site.whatsapp}
-              target="_blank"
-              rel="noreferrer"
-              className={cx(buttonStyles({ size: 'sm' }), 'ml-2')}
-            >
-              <ButtonContent icon="arrow_outward">WhatsApp</ButtonContent>
-            </a>
           </nav>
 
-          <div className="flex items-center gap-2 md:hidden">
-            <ThemeToggle mode={mode} onChange={setMode} compact />
-            <IconButton
-              icon={open ? 'close' : 'menu'}
-              label={open ? 'Tutup menu' : 'Buka menu'}
-              onClick={() => setOpen((value) => !value)}
-              aria-expanded={open}
-            />
-          </div>
+          <ThemeToggle mode={mode} onChange={setMode} compact className="ml-1" />
+
+          <a
+            href={site.whatsapp}
+            target="_blank"
+            rel="noreferrer"
+            className={cx(buttonStyles({ size: 'sm' }), 'ml-1 hidden md:inline-flex')}
+          >
+            <ButtonContent icon="arrow_outward">WhatsApp</ButtonContent>
+          </a>
+
+          <IconButton
+            icon={open ? 'close' : 'menu'}
+            label={open ? 'Tutup menu' : 'Buka menu'}
+            onClick={() => setOpen((value) => !value)}
+            aria-expanded={open}
+            className="md:hidden"
+          />
         </div>
       </header>
 
@@ -125,62 +119,46 @@ export function Nav() {
         ref={drawerRef}
         aria-hidden={!open}
         inert={!open}
-        className="pointer-events-none invisible fixed inset-x-0 bottom-0 top-[70px] z-40 overflow-y-auto bg-surface-container-low px-5 pb-10 pt-6 opacity-0 md:hidden"
+        className="glass pointer-events-none invisible fixed inset-x-4 top-[calc(env(safe-area-inset-top,0px)+72px)] z-40 max-h-[calc(100dvh-100px)] overflow-y-auto rounded-[24px] p-4 opacity-0 md:hidden"
       >
-        <div className="flex min-h-full flex-col justify-between">
-          <nav className="flex flex-col gap-1">
-            {links.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                data-drawer-item
-                className={({ isActive }) =>
-                  cx(
-                    'state-layer flex items-center justify-between rounded-full px-4 py-3.5 font-display-tight text-[22px] transition-colors',
-                    isActive
-                      ? 'bg-secondary-container text-on-secondary-container'
-                      : 'text-on-surface',
-                  )
-                }
-              >
-                <span className="relative z-10">{link.label}</span>
-                <Icon name="arrow_outward" className="relative z-10 text-[20px] text-on-surface-variant" />
-              </NavLink>
-            ))}
-          </nav>
-
-          <div data-drawer-item className="mt-10 space-y-5">
-            <a
-              href={site.whatsapp}
-              target="_blank"
-              rel="noreferrer"
-              className={cx(buttonStyles(), 'w-full')}
+        <nav className="flex flex-col gap-0.5">
+          {links.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              data-drawer-item
+              className={({ isActive }) =>
+                cx(
+                  'state flex items-center justify-between rounded-[16px] px-4 py-3 text-[15px] font-medium transition-colors',
+                  isActive ? 'bg-fg/10 text-fg' : 'text-muted',
+                )
+              }
             >
-              <ButtonContent icon="arrow_outward">WhatsApp — {site.whatsappDisplay}</ButtonContent>
-            </a>
+              <span className="relative z-10">{link.label}</span>
+              <Icon name="arrow_outward" size={16} className="relative z-10 text-muted" />
+            </NavLink>
+          ))}
+        </nav>
 
-            <a href={`mailto:${site.email}`} className="block text-[14.5px] text-muted">
-              {site.email}
-            </a>
-
-            <div className="flex flex-wrap gap-x-5 gap-y-2">
-              {site.socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="label text-[12px] text-faint transition-colors hover:text-primary"
-                >
-                  {social.label}
-                </a>
-              ))}
-            </div>
-
-            <div className="border-t border-line pt-5">
-              <p className="label text-faint">Tema</p>
-              <ThemeToggle mode={mode} onChange={setMode} className="mt-3" />
-            </div>
+        <div data-drawer-item className="mt-5 space-y-4 border-t border-line pt-5">
+          <a href={site.whatsapp} target="_blank" rel="noreferrer" className={cx(buttonStyles(), 'w-full')}>
+            <ButtonContent icon="arrow_outward">WhatsApp {site.whatsappDisplay}</ButtonContent>
+          </a>
+          <a href={`mailto:${site.email}`} className="block text-[13px] text-muted">
+            {site.email}
+          </a>
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            {site.socials.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noreferrer"
+                className="text-[12.5px] text-muted transition-colors hover:text-fg"
+              >
+                {social.label}
+              </a>
+            ))}
           </div>
         </div>
       </div>

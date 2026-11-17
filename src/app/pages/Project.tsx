@@ -42,39 +42,35 @@ function ProjectView({ project }: { project: ProjectType }) {
         <div className="flex items-center justify-between pt-8">
           <Link
             to="/work"
-            className="group inline-flex items-center gap-2 text-[14px] text-muted transition-colors hover:text-primary"
+            className="group inline-flex items-center gap-2 text-[14px] text-muted transition-colors hover:text-fg"
           >
-            <Icon name="arrow_back" className="text-[18px] transition-transform group-hover:-translate-x-0.5" />
+            <Icon name="arrow_back" className="transition-transform group-hover:-translate-x-0.5" />
             Semua proyek
           </Link>
           <span className="num text-[12px] uppercase tracking-[0.14em] text-faint">{project.year}</span>
         </div>
 
         <header className="mt-10 lg:mt-14">
-          <span className="label text-primary">{project.category}</span>
-          <Lines
-            as="h1"
-            lines={[project.client]}
-            className="mt-5 font-display text-[clamp(42px,8vw,110px)]"
-          />
+          <span className="label text-accent">{project.category}</span>
+          <Lines as="h1" lines={[project.client]} className="mt-5 font-display text-[clamp(42px,8vw,110px)]" />
           <p className="mt-7 max-w-[62ch] text-[16.5px] leading-relaxed text-muted">{project.summary}</p>
 
           <dl className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <div className="rounded-[20px] border border-outline-variant bg-surface-container px-5 py-5">
+            <div className="glass rounded-[20px] px-5 py-5">
               <dt className="label text-faint">Sektor</dt>
-              <dd className="mt-2.5 text-[14.5px] text-fg">{project.sector}</dd>
+              <dd className="mt-2.5 text-[14.5px]">{project.sector}</dd>
             </div>
-            <div className="rounded-[20px] border border-outline-variant bg-surface-container px-5 py-5">
+            <div className="glass rounded-[20px] px-5 py-5">
               <dt className="label text-faint">Kanal</dt>
-              <dd className="mt-2.5 text-[14.5px] text-fg">{project.channels.join(', ')}</dd>
+              <dd className="mt-2.5 text-[14.5px]">{project.channels.join(', ')}</dd>
             </div>
-            <div className="rounded-[20px] border border-outline-variant bg-surface-container px-5 py-5">
+            <div className="glass rounded-[20px] px-5 py-5">
               <dt className="label text-faint">Peran</dt>
-              <dd className="mt-2.5 text-[14.5px] text-fg">{project.role[0]}</dd>
+              <dd className="mt-2.5 text-[14.5px]">{project.role[0]}</dd>
             </div>
-            <div className="rounded-[20px] border border-outline-variant bg-surface-container px-5 py-5">
+            <div className="glass rounded-[20px] px-5 py-5">
               <dt className="label text-faint">Jumlah karya</dt>
-              <dd className="mt-2.5 text-[14.5px] text-fg">{project.pieces.length} karya</dd>
+              <dd className="mt-2.5 text-[14.5px]">{project.pieces.length} karya</dd>
             </div>
           </dl>
         </header>
@@ -89,12 +85,12 @@ function ProjectView({ project }: { project: ProjectType }) {
           </div>
 
           <aside className="lg:sticky lg:top-24 lg:self-start">
-            <div className="rounded-[24px] border border-outline-variant bg-surface-container p-6">
+            <div className="glass rounded-[24px] p-6">
               <p className="label text-faint">Peran saya</p>
               <ul className="mt-4 space-y-2.5">
                 {project.role.map((role) => (
-                  <li key={role} className="flex items-center gap-2.5 text-[14.5px] text-fg/90">
-                    <span className="size-1.5 rounded-full bg-primary" />
+                  <li key={role} className="flex items-center gap-2.5 text-[14.5px]">
+                    <span className="size-1.5 rounded-full bg-accent" />
                     {role}
                   </li>
                 ))}
@@ -111,10 +107,13 @@ function ProjectView({ project }: { project: ProjectType }) {
                 href={site.whatsapp}
                 target="_blank"
                 rel="noreferrer"
-                className="group mt-7 flex items-center justify-between border-t border-line pt-5 text-[14px] text-fg/80 transition-colors hover:text-primary"
+                className="group mt-7 flex items-center justify-between border-t border-line pt-5 text-[14px] text-muted transition-colors hover:text-accent"
               >
                 Diskusikan proyek serupa
-                <Icon name="arrow_outward" className="text-[16px] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                <Icon
+                  name="arrow_outward"
+                  className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
               </a>
             </div>
           </aside>
@@ -164,10 +163,13 @@ function ProjectView({ project }: { project: ProjectType }) {
         </div>
         <dl className="mt-6 grid gap-4 sm:grid-cols-3">
           {project.results.map((result) => (
-            <div key={result.label} className="rounded-[24px] border border-outline-variant bg-surface-container px-5 py-7 sm:px-6">
-              <dd className="font-display text-[clamp(32px,4.4vw,52px)] leading-none text-fg">{result.value}</dd>
+            <div
+              key={result.label}
+              className="glass rounded-[24px] px-5 py-7 sm:px-6"
+            >
+              <dd className="font-display text-[clamp(32px,4.4vw,52px)] leading-none">{result.value}</dd>
               <dt className="mt-4 flex max-w-[26ch] items-start gap-2.5 text-[14px] leading-relaxed text-muted">
-                <span className="mt-[7px] size-1.5 shrink-0 rounded-full bg-primary" />
+                <span className="mt-[7px] size-1.5 shrink-0 rounded-full bg-accent" />
                 {result.label}
               </dt>
             </div>
@@ -182,13 +184,16 @@ function ProjectView({ project }: { project: ProjectType }) {
         >
           <div>
             <span className="label text-faint">Proyek berikutnya</span>
-            <p className="mt-3 font-display text-[clamp(30px,5vw,64px)] transition-colors group-hover:text-primary">
+            <p className="mt-3 font-display text-[clamp(30px,5vw,64px)] transition-colors group-hover:text-accent">
               {next.client}
             </p>
           </div>
-          <span className="inline-flex items-center gap-2 text-[14px] text-muted transition-colors group-hover:text-primary">
+          <span className="inline-flex items-center gap-2 text-[14px] text-muted">
             {next.category}
-            <Icon name="arrow_outward" className="text-[18px] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            <Icon
+              name="arrow_outward"
+              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
           </span>
         </Link>
       </section>
